@@ -3,10 +3,10 @@ Rails.application.routes.draw do
 
   namespace :api do
   	namespace :v1 do
-  		resources :contractors, only: [:index]
+  		resources :contractors, only: [:index, :show]
   		resources :clients, only: [:index]
   		resources :categories, only: [:index]
-  		resources :appointments, only: [:index]
+  		resources :appointments, only: [:index, :create]
 
   	end
   end
