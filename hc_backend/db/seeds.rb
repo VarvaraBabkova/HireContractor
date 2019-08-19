@@ -13,8 +13,25 @@ Appointment.destroy_all
 cat1 = Category.create(name: "Plumbing")
 cat2 = Category.create(name: "Housekeeping")
 
-c1 = Contractor.create(name: "Joe Shmoe", price: 20, work: "repair sinks", img:"", intro:"hi", category_id: cat1.id )
-c2 = Contractor.create(name: "Mary Leal", price: 10, work: "clean sinks", img:"", intro:"hi", category_id: cat2.id )
+
+c1 = Contractor.create(name: "Joe Shmoe", price: 20, work: "Chris gets it Done.", 
+	img:"https://ehmsolutions.org/wp-content/uploads/2018/04/construction-worker-200x374.png", 
+	intro:" I believe that every client should be 100% satisfied with the work I complete for them. 
+	If this is not the case I am always willing to go out and make changes to meet their expectations. 
+		I treat every project like it was being done in my own home.", category_id: cat1.id )
+c2 = Contractor.create(name: "Mary Leal", price: 10, work: "Houston's cleaning, packing,unpacking", 
+	img:"https://image.shutterstock.com/image-photo/attractive-beautiful-asian-woman-maid-260nw-704724562.jpg",
+intro: "$31 per hr. + tax. $30 off your 1st visit! You're in control of the time and duties.
+ 3 hour minimum. Over 540 excellent, verified reviews online available on request. 
+ Insured. Bonded. 30 years in business! Text or call me! Ginger, Abso Clean, Inc.", category_id: cat2.id )
+
+
+c3 = Contractor.create(name: "Joe Shmoe", price: 20, work: "Chris gets it Done.", 
+	img:"https://ehmsolutions.org/wp-content/uploads/2018/04/construction-worker-200x374.png", 
+	intro:" I believe that every client should be 100% satisfied with the work I complete for them. 
+	If this is not the case I am always willing to go out and make changes to meet their expectations. 
+		I treat every project like it was being done in my own home.", category_id: cat1.id )
+
 
 
 cl1 = Client.create(name: "Ryan Bell")
