@@ -1,11 +1,8 @@
 contractorURL = "http://localhost:3000/api/v1/contractors"
-clientURL 
+clientURL ="http://localhost:3000/api/v1/clients"
 apptURL = "http://localhost:3000/api/v1/appointments"
 
-fetch(contractorURL)
-.then(res => res.json())
-.then(r => console.log(r))
-const formCreate = document.querySelector(".front-appointment")
+
 function renderContractor(){
     const div = document.createElement("div")
 
@@ -18,9 +15,8 @@ function renderContractor(){
     div.append(bttn)
     divCreate.append(div)
 }
-formCreate.addEventListener("submit", e => {
-    e.preventDefault()
-})
+
+
 function newAppointment(name){
     fetch(contractorURL, {
         method: "POST",
@@ -35,6 +31,7 @@ function newAppointment(name){
     })
     .then(res => res.json())
     .then(task => renderTask(task))
+}
 
 const main = document.querySelector(".main")
 document.addEventListener("DOMContentLoaded", () => {
@@ -57,8 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 		console.log(categories)
 	})
+
+
+	const formCreate = document.querySelector(".initialize-appt")
+
+	formCreate.addEventListener("submit", e => {
+	    e.preventDefault()
+	})
 	
 }) //DOM
+
 
 
 
