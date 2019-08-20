@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	fund.className = "fund"
 	my_menu.append(fund)
 
+
 	fetch("http://localhost:3000/api/v1/categories")
 	.then(res => res.json())
 	.then(categories => {
@@ -38,9 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// const formCreate = document.querySelector(".initialize-appt")
 
-	// formCreate.addEventListener("submit", e => {
-	//     e.preventDefault()
-	// })
+
 	
 }) //DOM
 
@@ -135,6 +134,7 @@ function render_mini_card(c) {
 	return div_polar
 }
 
+
 // fetch("http://localhost:3000/api/v1/contractors")
 // .then(res => res.json())
 // .then(contractors => {
@@ -188,30 +188,5 @@ function render_mini_card(c) {
 // }
 
 
-function render_card(c) {
-	const main = document.querySelector(".main")
 
-	main.innerHTML = ""
-	let h2 = document.createElement("h2")
-	h2.innerText = c.name
 
-	let h4 = document.createElement("h4")
-	h4.innerText = "Price " + c.price + "$"
-
-	let div_polar = document.createElement("div")
-	div_polar.className = "polaroid"
-
-	let img = document.createElement("img")
-	img.src = c.img
-
-	let div_cont = document.createElement("div")
-	div_cont.className = "container"
-
-	//div_cont.append(h2)
-	div_polar.append(img)
-
-	let intro = document.createElement("h4")
-	intro.innerText = c.intro
-	
-	main.append( h2, div_polar, h4, intro)
-}
