@@ -6,35 +6,35 @@ document.addEventListener("DOMContentLoaded", () => {
     apptURL = "http://localhost:3000/api/v1/appointments"
 
 
-    function renderContractor(){
-        const div = document.createElement("div")
+    // function renderContractor(){
+    //     const div = document.createElement("div")
 
-        const h2 = document.createElement("h2")
-        h2.innerText = clients.name
+    //     const h2 = document.createElement("h2")
+    //     h2.innerText = clients.name
 
-        const p = document.createElement("p")
-        p.innerText = contractors.appointments.date 
+    //     const p = document.createElement("p")
+    //     p.innerText = contractors.appointments.date 
 
-        div.append(h2,p)
-        divCreate.append(div)
-    }
+    //     div.append(h2,p)
+    //     divCreate.append(div)
+    // }
 
 
-    function newAppointment(name){
-        fetch(contractorURL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "app[lication/json"
-            },
-            body: JSON.stringify({
-                name: client.id,
-                date: date,
-                time: time
-            })
-        })
-        .then(res => res.json())
-        .then(task => renderTask(task))
-    }
+    // function newAppointment(name){
+    //     fetch(contractorURL, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "app[lication/json"
+    //         },
+    //         body: JSON.stringify({
+    //             name: client.id,
+    //             date: date,
+    //             time: time
+    //         })
+    //     })
+    //     .then(res => res.json())
+    //     .then(task => renderTask(task))
+    // }
 
 const main = document.querySelector(".main")
 
