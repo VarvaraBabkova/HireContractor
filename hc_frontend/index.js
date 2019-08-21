@@ -61,12 +61,91 @@ document.addEventListener("DOMContentLoaded", () => {
 					    contractors.splice(contractors.length * Math.random() | 0, 1)[0];
 					}
 					console.log(contractors)
-					//fill_contractors_list(contractors)
+					fill_contractors_line(contractors)
 				})
 				modal.style.display = "none";
 	})
 	
 }) //DOM
+
+function fill_contractors_line(contractors) {
+	let main = document.querySelector(".main")
+	let my_menu = document.querySelector(".my_menu")
+
+	main.innerHTML = ""
+
+	contractors.forEach(c => {
+		let div_polar = render_mini_card(c, "red-question-mark.png")//"qmark.jpg"
+		
+		main.append(div_polar)
+		 
+
+		div_polar.addEventListener("click", () =>{
+			// if (div_polar.style.opacity < 1) 
+			// 	return
+
+			// console.log(c)
+			// console.log(chosen.includes(c.id))
+
+			// if (chosen.includes(c.id)){
+			// 	chosen = chosen.filter(id => id != c.id)
+			// 	my_menu.querySelector(".fund").innerText  = parseInt(my_menu.querySelector(".fund").innerText) + c.price
+
+			// 	if (main.getAttribute("category") == c.category_id)
+			// 	{
+			// 		main.append(div_polar)
+			// 	}else{
+			// 		my_menu.removeChild(div_polar)
+			// 	}
+
+			// 	able_disable(main, parseInt(my_menu.querySelector(".fund").innerText))
+
+			// 	console.log(my_menu)
+			//  } else {
+			// 	my_menu.append(div_polar)
+			// 	chosen.push(c.id)
+			// 	my_menu.querySelector(".fund").innerText = parseInt(my_menu.querySelector(".fund").innerText) - c.price
+			// 	able_disable(main, parseInt(my_menu.querySelector(".fund").innerText))
+
+			//  }
+			
+		})
+		able_disable(main, 0)
+	})
+
+	let flag = true
+	let yes_btn = document.createElement("button")
+	yes_btn.innerText = "Accept offer!"
+	yes_btn.className = "button green"
+	let no_btn = document.createElement("button")
+	no_btn.innerText = "Decline offer!"
+	no_btn.className = "button red"
+	let quote_text = document.createElement("h2")
+
+	my_menu.append(yes_btn)
+	my_menu.append(no_btn)
+	my_menu.append(quote_text)
+
+
+	yes_btn.addEventListener("click", () => {
+		flag = false
+	})
+
+	no_btn.addEventListener("click", () => {
+		if (contractors.length > 0) {
+			quote_text.innerText = contractors.splice(contractors.length * Math.random() | 0, 1)[0].price
+
+		}
+	})
+	
+	//while ((contractors.length > line_length) && (flag)) {
+		//contractors.splice(contractors.length * Math.random() | 0, 1)[0];
+	quote_text.innerText = contractors.splice(contractors.length * Math.random() | 0, 1)[0].price
+
+	//}
+
+	
+}
 
 
 function fill_contractors_list(contractors) {
@@ -132,7 +211,7 @@ function able_disable(list, fund) {
 	})
 }
 
-function render_mini_card(c) {
+function render_mini_card(c, extra = null) {
 
 	let h4 = document.createElement("h4")
 	h4.innerText = "Price " + c.price + "$"
@@ -147,11 +226,27 @@ function render_mini_card(c) {
 	let img = document.createElement("img")
 	img.src = c.img
 
+
+	
+	let ex_img = document.createElement("img")
+
+	if (extra) {
+		ex_img.src = extra
+		ex_img.style.position = "absolute"
+		 ex_img.style.top = "0"
+		ex_img.style.left = "0"
+
+		 ex_img.style.zIndex = "10"
+		 ex_img.style.backgroundColor = "transparent"
+		 ex_img.style.height = "150px"
+	}
+	
+
 	let div_cont = document.createElement("div")
 	div_cont.className = "desc"
 
-	div_cont.append(h4_name, h4)
-	div_polar.append(img, div_cont)
+	//div_cont.append(h4_name, h4)
+	div_polar.append(img, ex_img)
 
 	div_polar.setAttribute("contractor_id", c.id)
 	div_polar.setAttribute("contractor_price", c.price)

@@ -102,6 +102,7 @@ div.gallery:hover {
 
 div.gallery img {
   width: 100%;
+ 
   height: auto;
 }
 
@@ -268,6 +269,15 @@ input[type=number]{
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
+
+  
+
+}
+.button:focus{
+  border: none !important;
+        box-shadow: none !important;
+        outline: 0 none !important;
+
 }
 
 .button[disabled], .button[disabled]:hover, .button[disabled]:active{
