@@ -10,6 +10,11 @@ const main = document.querySelector(".main")
 let chosen = []
 let my_menu = document.querySelector(".my_menu")
 
+let best_offer = null
+let best_price = null
+
+const dis_opacity = 0.5
+
 document.addEventListener("DOMContentLoaded", () => {
 	let my_menu = document.querySelector(".my_menu")
 
@@ -25,9 +30,30 @@ document.addEventListener("DOMContentLoaded", () => {
 	let nst_button = document.getElementById("non_standard_button")
 
 	st_button.addEventListener("click", () => {
-		let fund = document.createElement("h2")
+		let money_image = document.createElement("img")
+		let fund = document.createElement("h1")
+		//fund.innerText = "$" + document.getElementById("init_fund").value + " left!"
 		fund.innerText = document.getElementById("init_fund").value
 		fund.className = "fund"
+		fund.style.position = "absolute"
+		fund.style.width = "50px"
+		//fund.style.right = "-50px"
+		fund.style.left = (window.innerWidth - 100) + "px"
+		fund.style.bottom = "0"
+		fund.style.zIndex = "10"
+
+		money_image.src = "74q02z_large.png"
+		money_image.style.position = "absolute"
+		money_image.style.width = "150px"
+		money_image.style.height = "70px"
+		 money_image.style.backgroundColor = "transparent"
+
+		money_image.style.left = (window.innerWidth - 150) + "px"
+		//debugger
+		money_image.style.bottom = "0"
+		money_image.style.zIndex = "9"
+
+		my_menu.append(money_image)
 		my_menu.append(fund)
 
 		fetch("http://localhost:3000/api/v1/categories")
@@ -63,6 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
 					while (contractors.length > line_length) {
 					    contractors.splice(contractors.length * Math.random() | 0, 1)[0];
 					}
+
+					best_price = contractors.reduce((min, p) => p.price < min ? p.price : min, contractors[0].price);
+					best_offer = contractors.find(c => c.price == best_price)
+					
 					console.log(contractors)
 					fill_contractors_line(contractors)
 				})
@@ -97,7 +127,7 @@ function fill_contractors_line(contractors) {
 		})
 		able_disable_kicked(main, chosen)
 	})
-	
+	main.scrollTop = 0
 }
 
 
@@ -135,14 +165,14 @@ function fill_contractors_list(contractors) {
 					my_menu.removeChild(div_polar)
 				}
 
-				able_disable(main, parseInt(my_menu.querySelector(".fund").innerText))
+				able_disable_price(main, parseInt(my_menu.querySelector(".fund").innerText))
 
 				console.log(my_menu)
 			 } else {
 				my_menu.append(div_polar)
 				chosen.push(c.id)
 				my_menu.querySelector(".fund").innerText = parseInt(my_menu.querySelector(".fund").innerText) - c.price
-				able_disable(main, parseInt(my_menu.querySelector(".fund").innerText))
+				able_disable_price(main, parseInt(my_menu.querySelector(".fund").innerText))
 
 			 }
 			
@@ -150,6 +180,7 @@ function fill_contractors_list(contractors) {
 		})
 		able_disable_price(main, parseInt(my_menu.querySelector(".fund").innerText))
 	})
+	main.scrollTop = 0
 	
 }
 
@@ -173,8 +204,30 @@ function draw_mymenu_choice(my_menu, contractor, div_polar) {
 	quote_text.innerText = contractor.price
 
 	yes_btn.addEventListener("click", () => {
-		//able_disable_kicked(document.querySelector(".main"), chosen)
+		my_menu.innerHTML = ""
+		let h2 = document.createElement("h2")
+		h2.innerText = "Excellent choice!"
 
+		let result = document.createElement("h4")
+		if (contractor.price == best_price) {
+			result.innerText = "That was the best price in the list!"
+			my_menu.append(render_mini_card(contractor))
+			my_menu.append(h2)
+			my_menu.append(result)
+
+		}else{
+			result.innerText = "That was not the best price in the list though...."
+			my_menu.append(render_mini_card(best_offer))
+			my_menu.append(h2)
+			my_menu.append(result)
+
+		}
+
+		let bye_button = document.createElement("button")
+		bye_button.innerText = "See you next time!"
+		my_menu.append(bye_button)
+		bye_button.addEventListener("click", () => location.reload())
+		
 	})
 
 	no_btn.addEventListener("click", () => {
@@ -203,7 +256,7 @@ function change_to_tag(div_polar, price) {
 	 tag_img.style.height = "55px"
 	 tag_img.style.width = "55px"
 
-	  h4.innerText = price + "$"
+	  h4.innerText = "$" + price 
 	h4.style.position = "absolute"
 	h4.style.top = "0"
 	h4.style.right = "0"
@@ -223,7 +276,7 @@ function able_disable_price(list, fund) {
 		if (c.getAttribute("contractor_price") <= fund) {
 			c.style.opacity = 1
 		}else
-			c.style.opacity = 0.3
+			c.style.opacity = dis_opacity
 
 	})
 }
@@ -235,11 +288,11 @@ function able_disable_kicked(list, chosen) {
 			c.style.opacity = 1
 
 		}else
-			c.style.opacity = 0.3
+			c.style.opacity = dis_opacity
 	})
 }
 function disable_all(list) {
-	list.childNodes.forEach(c => c.style.opacity = 0.3)
+	list.childNodes.forEach(c => c.style.opacity = dis_opacity)
 }
 
 
@@ -286,7 +339,7 @@ function render_mini_card(c, extra = null, price_tag = true) {
 		 tag_img.style.height = "55px"
 		 tag_img.style.width = "55px"
 
-		  h4.innerText = c.price + "$"
+		  h4.innerText = "$" +  c.price
 		h4.style.position = "absolute"
 		h4.style.top = "0"
 		h4.style.right = "0"

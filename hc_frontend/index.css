@@ -17,7 +17,6 @@ body {
 }
 
 .my_menu {
-  overflow: hidden;
   background-color: #ddd;
   position: fixed; /* Set the navbar to fixed position */
   bottom: 0; /* Position the navbar at the top of the page */
@@ -25,14 +24,19 @@ body {
   height: 200px;
   box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.2), 0 -6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 100;
+  overflow-x: scroll;
+
 }
 
 .fund {
   position: fixed; /* Set the navbar to fixed position */
   bottom: 20px; 
   right: 20px;
-  background-color: rgb(60, 179, 113);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: lawngreen;
+  text-shadow: 2px 2px 3px black, 0 0 25px blue, 0 0 5px green;
+  text-align: center;
+  /*background-color: rgb(60, 179, 113);*/
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 
 }
 
@@ -117,7 +121,7 @@ div.desc {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 100; /* Sit on top */
+  z-index: 1000; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
