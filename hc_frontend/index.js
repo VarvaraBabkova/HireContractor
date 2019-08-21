@@ -10,37 +10,61 @@ let my_menu = document.querySelector(".my_menu")
 document.addEventListener("DOMContentLoaded", () => {
 	let my_menu = document.querySelector(".my_menu")
 
-	let fund = document.createElement("h2")
-	fund.innerText = init_fund
-	fund.className = "fund"
-	my_menu.append(fund)
+	let modal = document.getElementById("myModal");
+	modal.style.display = "block";
 
+	let span = document.getElementsByClassName("close")[0];
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
 
+	let st_button = document.getElementById("standard_button")
+	let nst_button = document.getElementById("non_standard_button")
 
-	fetch("http://localhost:3000/api/v1/categories")
-	.then(res => res.json())
-	.then(categories => {
-		let barmenu = document.querySelector(".navbar")
+	st_button.addEventListener("click", () => {
+		let fund = document.createElement("h2")
+		fund.innerText = document.getElementById("init_fund").value
+		fund.className = "fund"
+		my_menu.append(fund)
 
-		barmenu.innerHTML = ""
-		
-		categories.forEach(c => {
-			let ahref = document.createElement("button")
-			ahref.innerText = c.name
-			barmenu.append(ahref)
-			ahref.addEventListener("click", () =>{
-				fill_contractors_list(c.contractors)
+		fetch("http://localhost:3000/api/v1/categories")
+		.then(res => res.json())
+		.then(categories => {
+			let barmenu = document.querySelector(".navbar")
+
+			barmenu.innerHTML = ""
+			
+			categories.forEach(c => {
+				let ahref = document.createElement("button")
+				ahref.innerText = c.name
+				barmenu.append(ahref)
+				ahref.addEventListener("click", () =>{
+					fill_contractors_list(c.contractors)
+				})
 			})
+			fill_contractors_list(categories[0].contractors)
 		})
-
-		fill_contractors_list(categories[0].contractors)
-		console.log(categories)
+		modal.style.display = "none";
 	})
 
+	nst_button.addEventListener("click", () => {
+		let line_length = document.getElementById("line").value
 
-	// const formCreate = document.querySelector(".initialize-appt")
+		fetch("http://localhost:3000/api/v1/contractors")
+				.then(res => res.json())
+				.then(contractors => {
+					let barmenu = document.querySelector(".navbar")
 
-
+					barmenu.innerHTML = ""
+					
+					while (contractors.length > line_length) {
+					    contractors.splice(contractors.length * Math.random() | 0, 1)[0];
+					}
+					console.log(contractors)
+					//fill_contractors_list(contractors)
+				})
+				modal.style.display = "none";
+	})
 	
 }) //DOM
 
@@ -51,7 +75,7 @@ function fill_contractors_list(contractors) {
 
 	main.setAttribute("category", contractors[0].category_id)
 	main.innerHTML = ""
-	//my_menu.innerHTML = ""
+	//main.append(fun_background())
 
 	contractors.forEach(c => {
 		let div_polar = render_mini_card(c)
@@ -135,6 +159,11 @@ function render_mini_card(c) {
 	return div_polar
 }
 
+function fun_background() {
+	const div1 = document.createElement("div")
+	div1.className = "circle"
+	return div1
+}
 
 // fetch("http://localhost:3000/api/v1/contractors")
 // .then(res => res.json())
