@@ -12,7 +12,7 @@ body {
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-       z-index: 1;
+       z-index: 100;
 
 }
 
@@ -24,7 +24,7 @@ body {
   width: 10000px; /* Full width */
   height: 200px;
   box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.2), 0 -6px 20px 0 rgba(0, 0, 0, 0.19);
-
+  z-index: 100;
 }
 
 .fund {
@@ -102,7 +102,7 @@ div.gallery:hover {
 
 div.gallery img {
   width: 100%;
- 
+
   height: auto;
 }
 
