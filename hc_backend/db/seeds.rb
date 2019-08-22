@@ -85,6 +85,7 @@ g_img_array = [
 
 
 c1 = Contractor.create(name: "Harry", price: rand(5..30), work: "Chris gets it Done.", 
+
 	img:"https://ehmsolutions.org/wp-content/uploads/2018/04/construction-worker-200x374.png", 
 	intro:" I believe that every client should be 100% satisfied with the work I complete for them. 
 	If this is not the case I am always willing to go out and make changes to meet their expectations. 

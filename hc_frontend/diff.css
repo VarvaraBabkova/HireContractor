@@ -1,0 +1,99 @@
+body {margin:0;}
+
+
+.navbar {
+  overflow: hidden;
+  background-color: #999999;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+.my_menu {
+  overflow: hidden;
+  background-color: #ddd;
+  position: fixed; /* Set the navbar to fixed position */
+  bottom: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  height: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.fund {
+  position: fixed; /* Set the navbar to fixed position */
+  bottom: 20px; 
+  right: 20px;
+  background-color: rgb(60, 179, 113);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.navbar button {
+
+  width: 33.33%;
+  border: none;
+  background-color: #fff;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.navbar button:hover {
+  background: #ddd;
+  color: green;
+}
+
+.navbar button:focus {
+        border: none !important;
+        box-shadow: none !important;
+        outline: 0 none !important;
+    }
+
+
+/* Style page content */
+.main {
+  margin-top: 60px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+  color: black;
+  /*text-align: right;*/
+}
+
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+
+  width: 150px;
+  height: 150px;
+   overflow: hidden;
+   object-fit: cover;
+
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    margin: 10px;
+    position: relative;
+
+    content: "name";
+    color: red;
+
+    /*opacity: 0.3;*/
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
