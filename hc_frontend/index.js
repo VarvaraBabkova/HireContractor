@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	let st_button = document.getElementById("standard_button")
 	let nst_button = document.getElementById("non_standard_button")
 
+/////////////////////////////GAME ONE/////////////////////////////////////////////////////////////////////////
+
 	st_button.addEventListener("click", () => {
 		let money_image = document.createElement("img")
 		let fund = document.createElement("h1")
@@ -75,28 +77,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 		modal.style.display = "none";
 	})
-
+/////////////////////////////GAME TWO/////////////////////////////////////////////////////////////////////////
 	nst_button.addEventListener("click", () => {
 		let line_length = document.getElementById("line").value
 
 		fetch("http://localhost:3000/api/v1/contractors")
-				.then(res => res.json())
-				.then(contractors => {
-					let barmenu = document.querySelector(".navbar")
+		.then(res => res.json())
+		.then(contractors => {
+			let barmenu = document.querySelector(".navbar")
 
-					barmenu.innerHTML = ""
-					
-					while (contractors.length > line_length) {
-					    contractors.splice(contractors.length * Math.random() | 0, 1)[0];
-					}
+			barmenu.innerHTML = ""
+			
+			while (contractors.length > line_length) {
+			    contractors.splice(contractors.length * Math.random() | 0, 1)[0];
+			}
 
-					best_price = contractors.reduce((min, p) => p.price < min ? p.price : min, contractors[0].price);
-					best_offer = contractors.find(c => c.price == best_price)
-					
-					console.log(contractors)
-					fill_contractors_line(contractors)
-				})
-				modal.style.display = "none";
+			best_price = contractors.reduce((min, p) => p.price < min ? p.price : min, contractors[0].price);
+			best_offer = contractors.find(c => c.price == best_price)
+			
+			console.log(contractors)
+			fill_contractors_line(contractors)
+		})
+		modal.style.display = "none";
 	})
 	
 }) //DOM
@@ -137,7 +139,6 @@ function fill_contractors_list(contractors) {
 
 	main.setAttribute("category", contractors[0].category_id)
 	main.innerHTML = ""
-	//main.append(fun_background())
 
 	contractors.forEach(c => {
 		let div_polar = render_mini_card(c)
@@ -183,6 +184,8 @@ function fill_contractors_list(contractors) {
 	main.scrollTop = 0
 	
 }
+
+
 
 function draw_mymenu_choice(my_menu, contractor, div_polar) {
 	let yes_btn = document.createElement("button")
@@ -238,37 +241,6 @@ function draw_mymenu_choice(my_menu, contractor, div_polar) {
 	})
 
 }
-function change_to_tag(div_polar, price) {
-	console.log(div_polar, price)
-
-	div_polar.removeChild(div_polar.children[1])
-
-	let tag_img = document.createElement("img")
-	let h4 = document.createElement("h4")
-
-	tag_img.src = price_tag_image
-	tag_img.style.position = "absolute"
-	tag_img.style.top = "0"
-	tag_img.style.right = "0"
-
-	 tag_img.style.zIndex = "10"
-	 tag_img.style.backgroundColor = "transparent"
-	 tag_img.style.height = "55px"
-	 tag_img.style.width = "55px"
-
-	  h4.innerText = "$" + price 
-	h4.style.position = "absolute"
-	h4.style.top = "0"
-	h4.style.right = "0"
-	h4.style.zIndex = "20"
-	 h4.style.backgroundColor = "transparent"
-	 h4.style.height = "50px"
-	 h4.style.width = "40px"
-	
-
-	div_polar.append(tag_img, h4)
-	console.log(div_polar)
-}
 
 
 function able_disable_price(list, fund) {
@@ -291,72 +263,13 @@ function able_disable_kicked(list, chosen) {
 			c.style.opacity = dis_opacity
 	})
 }
+
 function disable_all(list) {
 	list.childNodes.forEach(c => c.style.opacity = dis_opacity)
 }
 
 
-function render_mini_card(c, extra = null, price_tag = true) {
 
-	let h4_name = document.createElement("h4")
-	h4_name.innerText = c.name
-
-	
-	let div_polar = document.createElement("div")
-	div_polar.className = "gallery"
-
-	let img = document.createElement("img")
-	img.src = c.img
-
-
-	
-	let ex_img = document.createElement("img")
-	ex_img.id = "extra_image"
-
-	if (extra) {
-		ex_img.src = extra
-		ex_img.style.position = "absolute"
-		 ex_img.style.top = "0"
-		ex_img.style.left = "0"
-
-		 ex_img.style.zIndex = "10"
-		 ex_img.style.backgroundColor = "transparent"
-		 ex_img.style.height = "150px"
-	}
-	
-	let tag_img = document.createElement("img")
-	let h4 = document.createElement("h4")
-
-
-	if (price_tag) {
-		tag_img.src = price_tag_image
-		tag_img.style.position = "absolute"
-		tag_img.style.top = "0"
-		tag_img.style.right = "0"
-
-		 tag_img.style.zIndex = "10"
-		 tag_img.style.backgroundColor = "transparent"
-		 tag_img.style.height = "55px"
-		 tag_img.style.width = "55px"
-
-		  h4.innerText = "$" +  c.price
-		h4.style.position = "absolute"
-		h4.style.top = "0"
-		h4.style.right = "0"
-		h4.style.zIndex = "20"
-		 h4.style.backgroundColor = "transparent"
-		 h4.style.height = "50px"
-		 h4.style.width = "40px"
-	}
-	
-
-	div_polar.append(img, ex_img, tag_img, h4)
-
-	div_polar.setAttribute("contractor_id", c.id)
-	div_polar.setAttribute("contractor_price", c.price)
-
-	return div_polar
-}
 
 
 
